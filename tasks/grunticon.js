@@ -46,6 +46,7 @@ module.exports = function( grunt , undefined ) {
 			colors: {},
 			pngfolder: "png",
 			template: "",
+			autoRunJS: "",
 			previewTemplate: path.join( __dirname, "..", "example", "preview.hbs" )
 		});
 
@@ -77,6 +78,16 @@ module.exports = function( grunt , undefined ) {
 		grunt.log.writeln( "grunticon now minifying the stylesheet loader source." );
 		var banner = grunt.file.read( config.files.banner );
 		var min = banner + "\n" + uglify.minify( config.files.loader ).code;
+		// if autoRunJS, append function to output
+		if ( config.autoRunJS !== "" ) {
+			var autoload = "grunticon([" + [
+				"'" + config.autoRunJS + "/" + config.datasvgcss + "'",
+				"'" + config.autoRunJS + "/" + config.datapngcss + "'",
+				"'" + config.autoRunJS + "/" + config.urlpngcss + "'"
+				].join(",") + "]);";
+			min += autoload;
+		} else {
+		}
 		grunt.file.write( path.join( config.dest, config.loadersnippet ), min );
 		grunt.log.writeln( "grunticon loader file created." );
 

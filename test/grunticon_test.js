@@ -28,11 +28,14 @@ exports['grunt-grunticon'] = {
 		done();
 	},
 	loader: function(test) {
-		test.expect(1);
+		test.expect(2);
 
-		var actual = grunt.file.read('example/output/grunticon.loader.js');
-		var expected = grunt.file.read('test/expected/grunticon.loader.js');
-		test.equal(actual, expected, 'loader should match properly');
+		var actual1 = grunt.file.read('example/output/grunticon.loader.js');
+		var expected1 = grunt.file.read('test/expected/grunticon.loader.js');
+		var actual2 = grunt.file.read('example/output/grunticon.loader.autorunjs.js');
+		var expected2 = grunt.file.read('test/expected/grunticon.loader.autorunjs.js');
+		test.equal(actual1, expected1, 'loader should match properly');
+		test.equal(actual2, expected2, 'loader should match properly and will run automatically');
 
 		test.done();
 	},

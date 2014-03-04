@@ -231,6 +231,13 @@ Example of .hbs file contents:
 Allows you to predefine colors as variables that can be used in filename color configuration.
 
 
+#### options.autoRunJS
+Type: `String`
+Default value: `""`
+
+ Set this to the relative URL to the stylesheets to make it execute automatically
+
+
 #### Automating color variations
 
 Grunticon allows you to output any icon in different colors simply by changing its filename to the following syntax: `myfilename.colors-red-aa0000-gray.svg`. In this example, any color names or hexidecimal values that follow `colors-` and are separated by a dash will be used to generate additional icons of that color. By default, each icon will be assigned a numbered class name for CSS use. You can improve the class naming conventions by defining color variables in your gruntfile's `colors` option shown above. When defined, you can reference a color variable in place of a color in your file names, and the generated classes will use that variable name as well. See the `gruntfile.js`'s `colors` option and the sample bear svg for an example of color automation.

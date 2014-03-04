@@ -80,7 +80,46 @@ module.exports = function(grunt) {
 					},
 
 					template: "example/default-css.hbs",
-					previewTemplate: "example/preview.hbs"
+					previewTemplate: "example/preview.hbs",
+
+					// set this to the web path to the scripts to include the loader function in the loader snippet
+					autoRunJS: ""
+
+				},
+			},
+			autoRunJS: {
+				files: [{
+					expand: true,
+					cwd: 'example/source',
+					src: ['*.svg', '*.png'],
+					dest: "example/output"
+				}],
+				options: {
+					svgo: true,
+					pngcrush: false,
+					datasvgcss: "icons.data.svg.css",
+					datapngcss: "icons.data.png.css",
+					urlpngcss: "icons.fallback.css",
+					previewhtml: "preview.html",
+					loadersnippet: "grunticon.loader.autorunjs.js",
+					pngfolder: "png",
+					cssprefix: ".icon-",
+					defaultWidth: "300px",
+					defaultHeight: "200px",
+					colors: {
+						primary: "red",
+						secondary: "#666"
+					},
+					cssbasepath: "/",
+					customselectors: {
+						"cat" : ["#el-gato"],
+						"gummy-bears-2" : ["nav li a.deadly-bears:before"]
+					},
+					template: "example/default-css.hbs",
+					previewTemplate: "example/preview.hbs",
+
+					// set this to the web path to the scripts to include the loader function in the loader snippet
+					autoRunJS: "/png"
 
 				}
 			}
@@ -110,8 +149,8 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks( 'grunt-svgmin' );
 
 	// Default task.
-	grunt.registerTask('skip-tests', ['jshint', 'grunticon:foo']);
-	grunt.registerTask('travis', ['jshint', 'svgmin', 'grunticon:foo', 'nodeunit']);
+	grunt.registerTask('skip-tests', ['jshint', 'grunticon:foo', 'grunticon:autoRunJS']);
+	grunt.registerTask('travis', ['jshint', 'svgmin', 'grunticon:foo', 'grunticon:autoRunJS', 'nodeunit']);
 	grunt.registerTask('default', ['travis']);
 
 };
