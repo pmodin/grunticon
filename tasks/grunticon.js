@@ -86,7 +86,6 @@ module.exports = function( grunt , undefined ) {
 				"'" + config.autoRunJS + "/" + config.urlpngcss + "'"
 				].join(",") + "]);";
 			min += autoload;
-		} else {
 		}
 		grunt.file.write( path.join( config.dest, config.loadersnippet ), min );
 		grunt.log.writeln( "grunticon loader file created." );
